@@ -36,9 +36,11 @@ public class HzQueueEndpoint extends DefaultEndpoint {
     @UriParam(defaultValue = "1000")
     private int poolingInterval = 1000;
     @UriParam(defaultValue = "", description = "endpoint consuming backoff given idle event")
-    private String idleBackoffEventConsumer = null;
+    private String idleBackoffEventConsumer;
     @UriParam(defaultValue = "", description = "endpoint consuming backoff given error event")
-    private String errorBackoffEventConsumer = null;
+    private String errorBackoffEventConsumer;
+    @UriParam(defaultValue = "", description = "this will be ignored. added only for compatibility")
+    private String transacted;
 
     public HzQueueEndpoint(String uri, HzQueueComponent component, HazelcastInstance hzInstance, String targetQueue) {
         super(uri, component);
@@ -136,5 +138,13 @@ public class HzQueueEndpoint extends DefaultEndpoint {
 
     public void setErrorBackoffEventConsumer(String errorBackoffEventConsumer) {
         this.errorBackoffEventConsumer = errorBackoffEventConsumer;
+    }
+
+    public String getTransacted() {
+        return transacted;
+    }
+
+    public void setTransacted(String transacted) {
+        this.transacted = transacted;
     }
 }
