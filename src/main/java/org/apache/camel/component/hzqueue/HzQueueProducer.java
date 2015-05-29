@@ -1,8 +1,8 @@
-package org.apache.camel.component;
+package org.apache.camel.component.hzqueue;
 
 import com.hazelcast.core.IQueue;
 import org.apache.camel.Exchange;
-import org.apache.camel.component.utils.HzComponentHelper;
+import org.apache.camel.component.hzqueue.utils.HzComponentHelper;
 import org.apache.camel.impl.DefaultProducer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

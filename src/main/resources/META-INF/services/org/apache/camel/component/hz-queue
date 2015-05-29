@@ -1,1 +1,1 @@
-class=org.apache.camel.component.HzQueueComponent
+class=org.apache.camel.component.hzqueue.HzQueueComponent

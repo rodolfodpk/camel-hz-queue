@@ -1,11 +1,11 @@
-package org.apache.camel.component;
+package org.apache.camel.component.hzqueue;
 
 import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.core.IQueue;
 import org.apache.camel.Consumer;
 import org.apache.camel.Processor;
 import org.apache.camel.Producer;
-import org.apache.camel.component.utils.HzInstanceRegistry;
+import org.apache.camel.component.hzqueue.utils.HzInstanceRegistry;
 import org.apache.camel.impl.DefaultEndpoint;
 import org.apache.camel.spi.Metadata;
 import org.apache.camel.spi.UriEndpoint;

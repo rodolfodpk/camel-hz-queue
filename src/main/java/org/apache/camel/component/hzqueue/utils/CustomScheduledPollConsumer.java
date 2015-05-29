@@ -1,4 +1,4 @@
-package org.apache.camel.component.utils;
+package org.apache.camel.component.hzqueue.utils;
 
 import org.apache.camel.*;
 import org.apache.camel.impl.DefaultConsumer;

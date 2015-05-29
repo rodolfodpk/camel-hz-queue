@@ -5,7 +5,6 @@ import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.component.util.HzQueueTestSupport;
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -37,14 +36,5 @@ public class SimpleTest extends HzQueueTestSupport {
                   .to("mock:result");
             }
         };
-    }
-
-    private List<UUID> generate(int dataSetSize) {
-        List<UUID> result = new ArrayList<>(dataSetSize);
-        for (int i=0; i< dataSetSize; i++){
-            result.add(UUID.randomUUID());
-            // System.out.println(result.get(i));
-        }
-        return result;
     }
 }

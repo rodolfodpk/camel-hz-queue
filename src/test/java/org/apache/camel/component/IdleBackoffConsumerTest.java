@@ -10,7 +10,7 @@ import static org.hamcrest.CoreMatchers.is;
 public class IdleBackoffConsumerTest extends HzQueueTestSupport {
 
     @Test
-    public void fromDefaultHzQueueFoo2Hz2QueueBar() throws Exception {
+    public void backoffGivenIdle() throws Exception {
 
         MockEndpoint mockResult = getMockEndpoint("mock:result");
         mockResult.setExpectedCount(0);

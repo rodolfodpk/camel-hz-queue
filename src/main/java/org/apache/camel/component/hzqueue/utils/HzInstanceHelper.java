@@ -1,4 +1,4 @@
-package org.apache.camel.component.utils;
+package org.apache.camel.component.hzqueue.utils;
 
 import com.hazelcast.config.Config;
 import com.hazelcast.core.Hazelcast;
