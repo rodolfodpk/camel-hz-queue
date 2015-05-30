@@ -41,10 +41,10 @@ Option                     | Type     | Default       | Description
 hzInstanceName             | String   | hz-instance-0 | Hazelcast instance             
 concurrentConsumers        | int      | 10            | Concurrent consumers within ScheduledExecutorService
 backoffIdleThreshold       | int      | 3             | Idle threshold
-backoffErrorThreshold      | int      | 3             | Error thrashold
+backoffErrorThreshold      | int      | 3             | Error threshold
 backoffMultiplier          | int      | 3             | Number of polls that will be skipped in case of idle or error
 poolingInterval            | int      | 1000          | In milliseconds
-idleBackoffEventConsumer   | String   | empty string  | When an idle thrashold applies, this endpoint will be notified
-errorBackoffEventConsumer  | String   | empty string  | When an error thrashold applies, this endpoint will be notified
+idleBackoffEventConsumer   | String   | empty string  | When an idle threshold applies, this endpoint will be notified
+errorBackoffEventConsumer  | String   | empty string  | When an error threshold applies, this endpoint will be notified
 transacted                 | String   | false         | Ignored. It was added just for backward compatibility
 
