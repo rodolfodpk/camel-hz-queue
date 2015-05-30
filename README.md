@@ -24,7 +24,6 @@ context.addRoutes( new RouteBuilder() {
 });
 
 ProducerTemplate producer = context.createProducerTemplate();
-
 producer.sendBody("hz-queue://foo?hzInstanceName=hz-source-cluster", "Hello!"); 
 
 Main main = new org.apache.camel.main.Main();
