@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/rodolfodpk/camel-hz-queue.svg?branch=master)](https://travis-ci.org/rodolfodpk/camel-hz-queue)
+
 # camel-hz-queue
 
 Camel component to consume Hazelcast queues using a ScheduledPollConsumer
