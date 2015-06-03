@@ -26,12 +26,12 @@ public class HzQueueEndpoint extends DefaultEndpoint {
     @UriParam(defaultValue = "hz-instance-0")
     private String hzInstanceName = HzInstanceRegistry.defaultHzInstanceName;
     @UriParam(defaultValue = "10")
-    private int concurrentConsumers = 1;
-    @UriParam(defaultValue = "10")
+    private int concurrentConsumers = 10;
+    @UriParam(defaultValue = "3")
     private int backoffIdleThreshold = 3;
-    @UriParam(defaultValue = "10")
+    @UriParam(defaultValue = "3")
     private int backoffErrorThreshold = 3;
-    @UriParam(defaultValue = "5")
+    @UriParam(defaultValue = "3")
     private int backoffMultiplier = 3;
     @UriParam(defaultValue = "1000")
     private int poolingInterval = 1000;
@@ -41,6 +41,10 @@ public class HzQueueEndpoint extends DefaultEndpoint {
     private String errorBackoffEventConsumer;
     @UriParam(defaultValue = "", description = "this will be ignored. added only for compatibility")
     private String transacted;
+
+    // producer
+    @UriParam(defaultValue = "3000", description = "queue.offer timeout. Any exception will be propagated")
+    private int offerTimeout = 3000;
 
     public HzQueueEndpoint(String uri, HzQueueComponent component, HazelcastInstance hzInstance, String targetQueue) {
         super(uri, component);
@@ -146,5 +150,9 @@ public class HzQueueEndpoint extends DefaultEndpoint {
 
     public void setTransacted(String transacted) {
         this.transacted = transacted;
+    }
+
+    public int getOfferTimeout() {
+        return offerTimeout;
     }
 }

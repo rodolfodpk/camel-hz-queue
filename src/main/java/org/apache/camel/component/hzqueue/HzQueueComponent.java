@@ -3,7 +3,6 @@ package org.apache.camel.component.hzqueue;
 import com.hazelcast.core.HazelcastInstance;
 import org.apache.camel.CamelContext;
 import org.apache.camel.Endpoint;
-import org.apache.camel.component.hzqueue.utils.HzConfigRegistry;
 import org.apache.camel.component.hzqueue.utils.HzInstanceHelper;
 import org.apache.camel.component.hzqueue.utils.HzInstanceRegistry;
 import org.apache.camel.impl.UriEndpointComponent;

@@ -7,9 +7,8 @@ import org.junit.Test;
 
 import java.util.List;
 import java.util.UUID;
-import java.util.concurrent.atomic.AtomicLong;
 
-public class TwoHzInstancesTest extends HzQueueTestSupport {
+public class HzProducerToHzConsumerTest extends HzQueueTestSupport {
 
     @Test
     public void twoHzInstances() throws Exception {
@@ -33,8 +32,6 @@ public class TwoHzInstancesTest extends HzQueueTestSupport {
 
     @Override
     protected RouteBuilder createRouteBuilder() throws Exception {
-
-        final AtomicLong i = new AtomicLong(0);
 
         return new RouteBuilder() {
             public void configure() {

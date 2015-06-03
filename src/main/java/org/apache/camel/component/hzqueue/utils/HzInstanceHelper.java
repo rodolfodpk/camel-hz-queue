@@ -3,6 +3,7 @@ package org.apache.camel.component.hzqueue.utils;
 import com.hazelcast.config.Config;
 import com.hazelcast.core.Hazelcast;
 import com.hazelcast.core.HazelcastInstance;
+import org.apache.camel.component.hzqueue.HzConfigRegistry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

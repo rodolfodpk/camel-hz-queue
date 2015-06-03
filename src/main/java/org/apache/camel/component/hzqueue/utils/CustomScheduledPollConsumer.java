@@ -146,12 +146,12 @@ public abstract class CustomScheduledPollConsumer extends DefaultConsumer implem
                     if(idleBackoffEventConsumer.isPresent()){
                         producerTemplate.sendBody(idleBackoffEventConsumer.get(), Arrays.asList(idleCounter, backoffCounter, backoffMultiplier));
                     }
-                    LOG.info("doRun() backoff due subsequent {} idles (backoff at {}/{})", new Object[]{idleCounter, backoffCounter, backoffMultiplier});
+                    LOG.debug("doRun() backoff due subsequent {} idles (backoff at {}/{})", new Object[]{idleCounter, backoffCounter, backoffMultiplier});
                 } else {
                     if(errorBackoffEventConsumer.isPresent()){
                         producerTemplate.sendBody(errorBackoffEventConsumer.get(), Arrays.asList(errorCounter, backoffCounter, backoffMultiplier));
                     }
-                    LOG.info("doRun() backoff due subsequent {} errors (backoff at {}/{})", new Object[]{errorCounter, backoffCounter, backoffMultiplier});
+                    LOG.debug("doRun() backoff due subsequent {} errors (backoff at {}/{})", new Object[]{errorCounter, backoffCounter, backoffMultiplier});
                 }
                 return;
             } else {

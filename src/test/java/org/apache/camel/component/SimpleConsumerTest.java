@@ -10,7 +10,7 @@ import java.util.UUID;
 
 import static org.hamcrest.CoreMatchers.is;
 
-public class SimpleTest extends HzQueueTestSupport {
+public class SimpleConsumerTest extends HzQueueTestSupport {
 
     @Test
     public void simple() throws Exception {

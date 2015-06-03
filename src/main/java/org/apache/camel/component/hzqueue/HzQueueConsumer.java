@@ -11,7 +11,6 @@ import org.slf4j.LoggerFactory;
 import java.util.Optional;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * The HzQueue consumer.
@@ -22,7 +21,6 @@ public class HzQueueConsumer extends CustomScheduledPollConsumer {
 
     private final HzQueueEndpoint endpoint;
     private final IQueue<Object> queue;
-    private AtomicInteger ai = new AtomicInteger(0);
 
     public HzQueueConsumer(HzQueueEndpoint endpoint, Processor processor) {
 
@@ -48,8 +46,6 @@ public class HzQueueConsumer extends CustomScheduledPollConsumer {
     protected int poll() throws Exception {
 
         final Exchange exchange = endpoint.createExchange();
-
-        // log.info("pooling " + ai.incrementAndGet());
 
         final Object obj = queue.poll(endpoint.getPoolingInterval()-100, TimeUnit.MILLISECONDS);
 
