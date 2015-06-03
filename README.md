@@ -35,11 +35,11 @@ main.run();
 
 This will consume the "Hello!" message from queue foo from hz-source-cluster and send it to queue bar within hz-target-cluster.
 
-## HZQueue Endpoint options
+## hz-queue consumer endpoint options
 
 Option                     | Type     | Default       | Description
 ---------------------------|----------|---------------|------------
-hzInstanceName             | String   | hz-instance-0 | Hazelcast instance             
+hzInstanceName             | String   | hz-instance-0 | Hazelcast instance name             
 concurrentConsumers        | int      | 10            | Concurrent consumers within ScheduledExecutorService
 backoffIdleThreshold       | int      | 3             | Idle threshold
 backoffErrorThreshold      | int      | 3             | Error threshold
@@ -49,3 +49,9 @@ idleBackoffEventConsumer   | String   | empty string  | When an idle threshold a
 errorBackoffEventConsumer  | String   | empty string  | When an error threshold applies, this endpoint will be notified
 transacted                 | String   | false         | Ignored. It was added just for backward compatibility
 
+## hz-queue producer endpoint options
+
+Option                     | Type     | Default       | Description
+---------------------------|----------|---------------|------------
+hzInstanceName             | String   | hz-instance-0 | Hazelcast instance name       
+offer timeout              | int      | 3000          | In milliseconds. Any offer exception will be propagated as RuntimeException
