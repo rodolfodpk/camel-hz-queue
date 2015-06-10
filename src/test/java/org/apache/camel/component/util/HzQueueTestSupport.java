@@ -13,11 +13,14 @@ import java.util.UUID;
 
 public class HzQueueTestSupport extends CamelTestSupport {
 
-    protected final HzInstanceRegistry hzInstanceRegistry;
+    protected HzInstanceRegistry hzInstanceRegistry;
 
     public HzQueueTestSupport() {
-        super();
-        this.hzInstanceRegistry = createHzInstanceRegistry();
+        this.hzInstanceRegistry = hzInstanceRegistry();
+    }
+
+    public HzInstanceRegistry hzInstanceRegistry() {
+        return new HzInstanceRegistry(hazelcastInstance4Test());
     }
 
     public JndiRegistry createRegistry() {
@@ -26,11 +29,7 @@ public class HzQueueTestSupport extends CamelTestSupport {
         return registry;
     }
 
-    private HzInstanceRegistry createHzInstanceRegistry() {
-        return new HzInstanceRegistry(HzInstanceRegistry.defaultHzInstanceName, hazelcastInstance());
-    }
-
-    protected HazelcastInstance hazelcastInstance() {
+    public static HazelcastInstance hazelcastInstance4Test() {
         HazelcastTestSupport hts = new HazelcastTestSupport() {
             @Override
             public HazelcastInstance createHazelcastInstance(Config config) {

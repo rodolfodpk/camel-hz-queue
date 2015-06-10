@@ -1,8 +1,10 @@
 package org.apache.camel.component;
 
 import org.apache.camel.builder.RouteBuilder;
+import org.apache.camel.component.hzqueue.utils.HzInstanceRegistry;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.component.util.HzQueueTestSupport;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.List;
@@ -10,7 +12,13 @@ import java.util.UUID;
 
 public class HzProducerToHzConsumerTest extends HzQueueTestSupport {
 
-    @Test
+    @Override
+    public HzInstanceRegistry hzInstanceRegistry() {
+        return new HzInstanceRegistry("default-hz-instance", hazelcastInstance4Test()).
+                        with("hz2", hazelcastInstance4Test());
+    }
+
+    @Test @Ignore
     public void twoHzInstances() throws Exception {
 
         List<UUID> data = generate(10);

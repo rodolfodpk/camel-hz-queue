@@ -1,8 +1,10 @@
 package org.apache.camel.component.util;
 
+import com.hazelcast.core.Hazelcast;
 import org.apache.camel.CamelContext;
 import org.apache.camel.LoggingLevel;
 import org.apache.camel.builder.RouteBuilder;
+import org.apache.camel.component.hzqueue.utils.HzInstanceRegistry;
 import org.apache.camel.impl.DefaultCamelContext;
 import org.apache.camel.impl.SimpleRegistry;
 import org.apache.camel.main.Main;
@@ -18,6 +20,10 @@ public class Start {
         main = new Main();
         main.enableHangupSupport();
         registry = new SimpleRegistry();
+//        registry.put(HzInstanceRegistry.class.getName(),
+//                new HzInstanceRegistry(HzQueueTestSupport.hazelcastInstance4Test()));
+        registry.put(HzInstanceRegistry.class.getName(),
+                new HzInstanceRegistry(Hazelcast.newHazelcastInstance()));
         context = new DefaultCamelContext(registry);
         context.setStreamCaching(true);
         context.setUseMDCLogging(true);
@@ -46,6 +52,10 @@ public class Start {
                         .log(LoggingLevel.INFO, "body--> ${body}")
                         .to("hz-queue://bar")
                         .to("mock:result");
+
+                from("timer://foo?fixedRate=true&period=200")
+                        .setBody(constant("test"))
+                        .to("hz-queue://foo");
             }
         };
     }

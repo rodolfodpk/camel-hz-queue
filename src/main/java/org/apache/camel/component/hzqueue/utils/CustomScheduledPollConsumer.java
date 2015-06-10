@@ -77,15 +77,6 @@ public abstract class CustomScheduledPollConsumer extends DefaultConsumer implem
         this.producerTemplate = getEndpoint().getCamelContext().createProducerTemplate();
     }
 
-    public CustomScheduledPollConsumer(Endpoint endpoint, Processor processor, ScheduledExecutorService scheduledExecutorService) {
-        super(endpoint, processor);
-        // we have been given an existing thread pool, so we should not manage its lifecycle
-        // so we should keep shutdownExecutor as false
-        this.scheduledExecutorService = scheduledExecutorService;
-        ObjectHelper.notNull(scheduledExecutorService, "scheduledExecutorService");
-        this.producerTemplate = getEndpoint().getCamelContext().createProducerTemplate();
-    }
-
     /**
      * Invoked whenever we should be polled
      */

@@ -3,7 +3,6 @@ package org.apache.camel.component.hzqueue;
 import com.hazelcast.core.HazelcastInstance;
 import org.apache.camel.CamelContext;
 import org.apache.camel.Endpoint;
-import org.apache.camel.component.hzqueue.utils.HzInstanceHelper;
 import org.apache.camel.component.hzqueue.utils.HzInstanceRegistry;
 import org.apache.camel.impl.UriEndpointComponent;
 
@@ -25,23 +24,34 @@ public class HzQueueComponent extends UriEndpointComponent {
         super(context, HzQueueEndpoint.class);
     }
 
-    protected Endpoint createEndpoint(String uri, String remaining, Map<String, Object> parameters) throws Exception {
-
-        final HzInstanceHelper hzInstanceHelper = getHzInstanceHelper(parameters);
-        final String queueName = remaining.substring(0, Math.max(remaining.indexOf("&"), remaining.length()));
-        final HzQueueEndpoint endpoint = new HzQueueEndpoint(uri, this, hzInstanceHelper.findHzInstance(), queueName);
-        setProperties(endpoint, parameters);
-        return endpoint;
+    String hzInstanceName(Map<String, Object> parameters) {
+        return (String) parameters.get("hzInstanceName");
     }
 
-    private HzInstanceHelper getHzInstanceHelper(Map<String, Object> parameters) {
+    protected Endpoint createEndpoint(String uri, String remaining, Map<String, Object> parameters) throws Exception {
 
-        final String hzInstanceName = (String) parameters.get("hzInstanceName");
-        final Optional<HzInstanceRegistry> hzInstanceRegistry =
-                getCamelContext().getRegistry().findByType(HzInstanceRegistry.class).stream().findFirst();
-        final Optional<HzConfigRegistry> hzConfigRegistry =
-                getCamelContext().getRegistry().findByType(HzConfigRegistry.class).stream().findFirst();
-        return new HzInstanceHelper(hzInstanceName != null ? hzInstanceName : HzInstanceRegistry.defaultHzInstanceName, hzInstanceRegistry, hzConfigRegistry);
+        final String hzInstanceName = hzInstanceName(parameters) ==null ? "default-hz-instance" : hzInstanceName(parameters);
+
+        final String queueName = remaining.substring(0, Math.max(remaining.indexOf("&"), remaining.length()));
+
+        final HzInstanceRegistry hzInstanceRegistry =
+                getCamelContext().getRegistry().findByType(HzInstanceRegistry.class).stream().findFirst().get();
+
+        if (hzInstanceRegistry == null) {
+            throw new IllegalStateException("You must have a HzInstanceRegistry instance within Camel registry !");
+        }
+
+        if (!hzInstanceRegistry.getHzFor(hzInstanceName).isPresent()) {
+            throw new IllegalStateException("You must have a Hazelcast instance named " + hzInstanceName + " within HzInstanceRegistry!");
+        }
+
+       final Optional<HazelcastInstance> hz = hzInstanceRegistry.getHzFor(hzInstanceName);
+
+       final HzQueueEndpoint endpoint =
+                new HzQueueEndpoint(uri, this, hzInstanceRegistry.getHzFor(hzInstanceName).get(), queueName);
+
+        setProperties(endpoint, parameters);
+        return endpoint;
     }
 
 }

@@ -23,8 +23,8 @@ public class HzQueueEndpoint extends DefaultEndpoint {
 
     @UriPath @Metadata(required = "true")
     private String name;
-    @UriParam(defaultValue = "hz-instance-0")
-    private String hzInstanceName = HzInstanceRegistry.defaultHzInstanceName;
+    @UriParam(defaultValue = HzInstanceRegistry.DEFAULT_INSTANCE_NAME)
+    private String hzInstanceName = HzInstanceRegistry.DEFAULT_INSTANCE_NAME;
     @UriParam(defaultValue = "10")
     private int concurrentConsumers = 10;
     @UriParam(defaultValue = "3")

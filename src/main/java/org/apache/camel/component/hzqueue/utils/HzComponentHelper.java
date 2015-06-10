@@ -5,6 +5,7 @@ import org.apache.camel.Exchange;
 import java.util.Map;
 
 public class HzComponentHelper {
+
     public static void copyHeaders(Exchange ex) {
         // get in headers
         Map<String, Object> headers = ex.getIn().getHeaders();
